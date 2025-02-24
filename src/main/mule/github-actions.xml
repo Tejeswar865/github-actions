@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<configuration-properties
+		doc:name="Environment specific properties"
+		doc:id="455e338c-5911-4baa-881b-9226113fef42"
+		file="properties/github-actions-${mule.env}.properties" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="9319dd34-6ac4-481d-a47f-5957219f7efb" file="properties/github-actions-secure-${mule.env}.properties" key="${enc.key}" />
+	<flow name="github-actionsFlow" doc:id="3eb34c06-199e-499f-8f85-43a68eacd61d" >
+		<scheduler doc:name="Scheduler" doc:id="1cf5b155-a64a-46c9-aeb2-c86e6c735c94" >
+			<scheduling-strategy >
+				<fixed-frequency startDelay="1000" timeUnit="DAYS"/>
+			</scheduling-strategy>
+		</scheduler>
+		<set-payload value="#[&quot;Check actions for:&quot; ++ (Mule::p('secure::secure.property') default &quot;&quot;)]" doc:name="Set Payload" doc:id="761c7444-e3c8-445d-9be4-52a4ed22422f" />
+		<logger level="INFO" doc:name="Logger" doc:id="717af0ef-5e89-4a90-968b-2314ca41692b" message="#[payload]"/>
+	</flow>
+</mule>
