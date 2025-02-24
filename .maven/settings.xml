@@ -10,7 +10,7 @@
     <server>
       <id>Repository</id> <!-- make sure this matches the serverId property in pom.xml -->
       <username>~~~Client~~~</username>
-      <password>${client.id}~?~${client.secret}</password> <!-- these come from the build.yml and your github secrets -->
+      <password>b870fb6f1fd44196ba990a41159dc8c7~?~B390151855D0414599CEEA0Eb210D89F</password> <!-- these come from the build.yml and your github secrets -->
     </server>
   </servers>
 
