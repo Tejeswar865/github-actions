@@ -62,7 +62,7 @@ jobs:
         artifactName=$(ls *.jar | head -1)
         mvn deploy -s .maven/settings.xml -DskipMunitTests -DmuleDeploy \
          -Dmule.artifact=$artifactName \
-         -Danypoint.username="$USERNAME" \
-         -Danypoint.password="$PASSWORD" \
+         -Danypoint.username="0056f8b89e0f4438a7205d47ed4614a3" \
+         -Danypoint.password="C386434bf0384195a961e4520ECE0de0" \
          -Denc.key="${{ secrets.DECRYPTION_KEY }}" \
          -Dmule.env="${{ secrets.ENV }}"
