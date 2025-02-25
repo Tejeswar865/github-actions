@@ -66,4 +66,5 @@ jobs:
           -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
           -Denc.key="${{ secrets.DECRYPTION_KEY }}" \
           -Dmule.env="${{ vars.MULEENV }}" \
+          -Denvironment="${{vars.DEPLOYENV}}"
           
