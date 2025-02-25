@@ -56,13 +56,17 @@ jobs:
         name: artifacts
     - name: Publish to Exchange
       run: |
-          mvn deploy --settings .maven/settings.xml -DskipMunitTests \
+          artifactName=$(ls *.jar | head -1)
+          mvn deploy --settings .maven/settings.xml -Dmule.artifact=$artifactName \
+          -DskipMunitTests \
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
           
     - name: Deploy to CloudHub 2.0
       run: |
-          mvn deploy --settings .maven/settings.xml -DskipMunitTests -DmuleDeploy \
+          artifactName=$(ls *.jar | head -1)
+          mvn deploy --settings .maven/settings.xml -DskipMunitTests -Dmule.artifact=$artifactName \
+          -DmuleDeploy \
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
           -Denc.key="${{ secrets.DECRYPTION_KEY }}" \
