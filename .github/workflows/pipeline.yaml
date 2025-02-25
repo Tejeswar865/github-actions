@@ -41,6 +41,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    environment: dev
     steps:    
     - name: Checkout this repo
       uses: actions/checkout@v4
@@ -63,4 +64,5 @@ jobs:
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
           -Denc.key="${{ secrets.DECRYPTION_KEY }}" \
-          -Dmule.env="${{ secrets.ENV }}"
+          -Dmule.env="${{ vars.MULEENV }}" \
+          -Denv= "${{ vars.DEPLOYENV }}"
