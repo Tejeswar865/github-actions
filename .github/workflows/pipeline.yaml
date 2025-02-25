@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: dev
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v4
@@ -65,4 +66,4 @@ jobs:
           -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
           -Denc.key="${{ secrets.DECRYPTION_KEY }}" \
           -Dmule.env="${{ vars.MULEENV }}" \
-          -Denv= "${{ vars.DEPLOYENV }}"
+          -Dcloudenv= "${{ vars.DEPLOYENV }}"
