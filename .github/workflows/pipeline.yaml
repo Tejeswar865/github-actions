@@ -54,18 +54,11 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: artifacts
-    - name: Publish to Exchange
-      run: |
-          artifactName=$(ls *.jar | head -1)
-          mvn deploy --settings .maven/settings.xml -Dmule.artifact=$artifactName \
-          -DskipMunitTests \
-          -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
-          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
           
     - name: Deploy to CloudHub 2.0
       run: |
           artifactName=$(ls *.jar | head -1)
-          mvn deploy --settings .maven/settings.xml -DskipMunitTests -Dmule.artifact=$artifactName \
+          mvn clean deploy --file pom.xml -s .maven/settings.xml -DskipMunitTests -Dmule.artifact=$artifactName \
           -DmuleDeploy \
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
